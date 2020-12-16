@@ -1,0 +1,17 @@
+{
+    "development": {
+        "username": "root",
+        "password": "abcd1234",
+        "database": "reto-final-mintic",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+    },
+    "test": {
+        "dialect": "sqlite",
+        "storage": "./database.sqlite3"
+    },
+    "production": {
+        "dialect": "sqlite",
+        "storage": "./database.sqlite3"
+    }
+}
