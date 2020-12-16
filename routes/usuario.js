@@ -1,7 +1,5 @@
 const routerx = require('express-promise-router');
-const userController = require('../controllers/usuario.controller.js')
-
-
+const userController = require('../controllers/UsuarioController.js')
 
 const router = routerx();
 
