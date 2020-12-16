@@ -1,7 +1,7 @@
+const emailFormat = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+const passwordFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&]?)([A-Za-z\d$@$!%*?&]|[^ ]){8,20}$/;
 module.exports = {
   validateSingUp: (nombre, email, password, confirmPassword, rol) => {
-    const emailFormat = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    const passwordFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&]?)([A-Za-z\d$@$!%*?&]|[^ ]){8,20}$/;
     let errors = [];
     if (nombre.trim() === "") {
       errors.push({
@@ -15,7 +15,7 @@ module.exports = {
     }
     if (!emailFormat.test(email)) {
       errors.push({
-        email: "La dirección de email " + email + " es incorrecta.",
+        email: "La dirección de email " + email + " es no tiene el formato correcto.",
       });
     }
     if (password.trim() === "") {
@@ -47,4 +47,24 @@ module.exports = {
 
     return errors.length > 0 ? errors : null;
   },
+  validateSingIn: (email, password) => {
+    let errors = [];
+    if (email.trim() === "") {
+      errors.push({
+        email: "El email no puede estar vacío",
+      });
+    }
+    if (!emailFormat.test(email)) {
+      errors.push({
+        email: "La dirección de email " + email + " es no tiene el formato correcto.",
+      });
+    }
+    if (password.trim() === "") {
+      errors.push({
+        password: "La contraseña no puede estar vacía",
+      });
+    }
+
+    return errors.length > 0 ? errors : null;
+  }
 };
