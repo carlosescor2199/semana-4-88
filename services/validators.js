@@ -66,5 +66,39 @@ module.exports = {
     }
 
     return errors.length > 0 ? errors : null;
+  },
+  validateCategoria(nombre, descripcion) {
+    let errors = [];
+
+    if (nombre.trim() === "") {
+      errors.push({
+        nombre: "El Nombre no puede estar vacía",
+      });
+    }
+    if (descripcion.trim() === "") {
+      errors.push({
+        descripcion: "La Descripción no puede estar vacía",
+      });
+    }
+    return errors.length > 0 ? errors : null;
+  },
+  validateArticulo(codigo, nombre, descripcion) {
+    let errors = [];
+    if (codigo.trim() === "") {
+      errors.push({
+        nombre: "El Nombre no puede estar vacía",
+      });
+    }
+    if (nombre.trim() === "") {
+      errors.push({
+        nombre: "El Nombre no puede estar vacía",
+      });
+    }
+    if (descripcion.trim() === "") {
+      errors.push({
+        descripcion: "La Descripción no puede estar vacía",
+      });
+    }
+    return errors.length > 0 ? errors : null;
   }
 };

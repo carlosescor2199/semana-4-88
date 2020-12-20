@@ -47,8 +47,7 @@ module.exports = {
             return res.status(401).send({ auth: false, accessToken: null, reason: "Invalid Password!" });
         }
         const token = await tokenService.encode(user.id, user.nombre, user.email, user.rol)
-        console.log(token)
-        return res.status(200).send({ accessToken: token });
+        return res.status(200).send({ tokenReturn: token });
 
     }
 }
