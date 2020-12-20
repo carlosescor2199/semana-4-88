@@ -1,14 +1,12 @@
 const db = require('../models');
-const { validateSingUp } = require('../services/validators');
+const { validateSingUp, validateSingIn } = require('../services/validators');
 const  bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const tokenService = require('../services/token');
 
 module.exports = {
     singUp: async (req, res) => {
         const { nombre, email, password, confirmPassword, rol } = req.body;
-        let errors = validateSingUp(nombre, email, password, confirmPassword, rol)
-        console.log(errors)
-        
+        let errors = validateSingUp(nombre, email, password, confirmPassword, rol);
         if(errors) {
             return res.status(200).json(errors);
         }
@@ -34,7 +32,22 @@ module.exports = {
         return res.status(201).json(resp)
 
     },
-    login: (req, res) => {
+    singIn: async (req, res) => {
+        const { email, password } = req.body;
+        const errors = validateSingIn(email, password);
+        if(errors) {
+            return res.status(200).json(errors);
+        }
+        const user = await db.Usuario.findOne({where: {email: email}});
+        if(user === null) {
+            return res.status(404).send('User Not Found.');
+        }
+        const matchPassword = await bcrypt.compare(password, user.password)
+        if(!matchPassword) {
+            return res.status(401).send({ auth: false, accessToken: null, reason: "Invalid Password!" });
+        }
+        const token = await tokenService.encode(user.id, user.nombre, user.email, user.rol)
+        return res.status(200).send({ tokenReturn: token });
 
     }
 }
