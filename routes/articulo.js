@@ -8,7 +8,7 @@ const router = routerx();
 
 router.post('/add', verifyUsuario, addArticulo);
 router.get('/list', allArticulos);
-router.get('/:id', getArticulo);
+router.get('/:id', verifyUsuario, getArticulo);
 router.put('/update', verifyUsuario, updateArticulo);
 router.put('/activate', verifyUsuario, activateArticulo);
 router.put('/deactivate', verifyUsuario, deactivateArticulo);
