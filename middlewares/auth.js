@@ -4,12 +4,14 @@ const db = require("../models");
 
 module.exports = {
   verifyUsuario: async (req, res, next) => {
-    if (!req.headers.token) {
+    if (!req.headers.authorization) {
       return res.status(404).send({
         message: "No token",
       });
     }
-    const response = await tokenService.decode(req.headers.token);
+    const resToken = req.headers.authorization.split(' ')[1];
+
+    const response = await tokenService.decode(resToken);
     if (response && response.id) {
       const user = await db.Usuario.findOne({ where: { id: response.id } });
       if (user) {
