@@ -17,7 +17,7 @@ module.exports = {
     return res.status(200).json(saveCategoria);
   },
   allCategorias: async (req, res) => {
-    const categorias = await db.Categoria.findAll({where: { estado: true }});
+    const categorias = await db.Categoria.findAll();
     return res.status(200).json(categorias);
   },
   getCategoria: async (req, res) => {

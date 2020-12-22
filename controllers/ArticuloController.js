@@ -57,7 +57,7 @@ module.exports = {
   },
   activateArticulo: async (req, res) => {
     const { id } = req.body;
-    const articulo = await db.Articulo.findOne({ where: { id: id } });
+    const articulo = await db.Articulo.findOne();
     if (!articulo) {
       return res.status(401).send("Id Invalido");
     }
