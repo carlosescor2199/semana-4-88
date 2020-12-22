@@ -1,7 +1,6 @@
 const emailFormat = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-const passwordFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&]?)([A-Za-z\d$@$!%*?&]|[^ ]){8,20}$/;
 module.exports = {
-  validateSingUp: (nombre, email, password, confirmPassword, rol) => {
+  validateSingUp: (nombre, email, password, rol) => {
     let errors = [];
     if (nombre.trim() === "") {
       errors.push({
@@ -21,22 +20,6 @@ module.exports = {
     if (password.trim() === "") {
       errors.push({
         password: "La contraseña no puede estar vacía",
-      });
-    }
-    if (!passwordFormat.test(password)) {
-      errors.push({
-        confirmPassword:
-          "La contrasela debe tener entre 8 y 20 carácteres, comenzar por una letra y tener mínimo 2 numeros",
-      });
-    }
-    if (confirmPassword.trim() === "") {
-      errors.push({
-        confirmPassword: "La contraseña de confirmación no puede estar vacía",
-      });
-    }
-    if (password !== confirmPassword) {
-      errors.push({
-        password: "Las contraseñas no coinciden",
       });
     }
     if (rol.trim() === "") {
