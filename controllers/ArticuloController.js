@@ -28,7 +28,10 @@ module.exports = {
     return res.status(200).json(saveArticulo);
   },
   allArticulos: async (req, res) => {
-    const articulos = await db.Articulo.findAll({ where: { estado: true } });
+    const articulos = await db.Articulo.findAll({
+      include: db.Categoria
+    });
+
     return res.status(200).json(articulos);
   },
   getArticulo: async (req, res) => {

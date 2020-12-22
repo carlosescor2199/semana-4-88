@@ -34,4 +34,8 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+
+db.Articulo.belongsTo(db.Categoria, { foreignKey: 'categoriaId' });
+db.Categoria.hasMany(db.Articulo, { foreignKey: 'categoriaId' });
+
 module.exports = db;
